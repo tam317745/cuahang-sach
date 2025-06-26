@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-z@2p^=fs)$p$_qftuq+d#f$)e42x=2c_lgu$&7@n$valhp-%rf
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://dapstore.onrender.com']
 
 # Application definition
 
@@ -137,5 +137,5 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CSRF_TRUSTED_ORIGINS = ['https://dapstore.onrender.com']
+
 
