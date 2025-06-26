@@ -1,0 +1,26 @@
+{% extends "app/home.html" %} 
+{% load static %}
+{% block contact %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>DAPSTORE Contact</title>
+    <link rel="stylesheet" href="{% static "register.css" %}"/>
+</head>
+
+    <div class="main-container">
+        <h1 class="heading">Liên Hệ Với <span class="highlight">DAPSTORE</span></h1>
+        <p class="intro-text">Chúng tôi luôn sẵn sàng hỗ trợ quý khách qua các kênh liên hệ dưới đây:</p>
+        <ul class="contact-list">
+            <li><span class="contact-label">Hotline:</span> 1900 1234 567</li>
+            <li><span class="contact-label">Email:</span> <a href="mailto:support@netabooks.com" class="contact-link">support@DAPSTORE.com</a></li>
+            <li><span class="contact-label">Facebook:</span> <a href="https://www.facebook.com/netabooks" target="_blank" class="contact-link">DAPSTORE Fanpage</a></li>
+            <li><span class="contact-label">Địa chỉ:</span> 123 Đường Sách, Quận 1, TP.HCM</li>
+        </ul>
+        <p class="description">Hãy liên hệ với chúng tôi để được tư vấn và hỗ trợ tốt nhất!</p>
+    </div>
+</html>
+
+{% endblock contact%}

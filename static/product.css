@@ -1,0 +1,182 @@
+.product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.product span {
+  flex: 1;
+  height: 2px;
+  background-color: #e5e7eb;
+}
+
+.product h3 {
+  font-weight: 800;
+  color: #111827;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+/* Book list styles */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  background-color: #ffffff;
+  max-width: 1280px;
+  padding: 20px;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Book item styles */
+.book-item {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 150px;
+  text-align: center;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.book-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px; /* Slight rounding for book covers */
+}
+.book-img:hover{
+  cursor: pointer;
+  transform: scale(1.1); /* Phóng to 110% */
+  transition: transform 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+/* Preorder button styles */
+.preorder-btn {
+  margin-top: 0.5rem;
+  background-color: #ef4444; /* Red color to match the "Đặt trước" button */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  border: none;
+}
+
+.preorder-btn i {
+  font-size: 0.625rem;
+}
+
+/* Book item title and author styles */
+.book-item h4, .book-item h3 {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #111827;
+  display: -webkit-box;
+  
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
+}
+
+.book-item p {
+  font-size: 0.625rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+/* Price container styles */
+.price-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align prices */
+  margin-top: 0.5rem;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #dc2626;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.price .currency {
+  vertical-align: baseline;
+  font-size: 0.8em;
+}
+
+.original-price {
+  font-size: 0.8rem;
+  color: #b0b0b0;
+  text-decoration: line-through;
+  margin-top: 0.25rem;
+}
+
+.discount {
+  display: inline-block;
+  margin-top: 0.25rem;
+  background-color: #f97316;
+  color: #ffffff;
+  font-size: 0.625rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+}
+
+/* phân trang */
+.pagination-btn {
+  background-color: #ef4444; /* Match preorder-btn color */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin: 0 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.pagination-btn:hover {
+  background-color: #dc2626; /* Darker red on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .book-list {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Smaller items on mobile */
+  }
+  .book-item {
+    max-width: 120px;
+  }
+  .price {
+    font-size: 0.9rem;
+  }
+  .book-img {
+    max-height: 180px; /* Adjust image height for smaller screens */
+  }
+}
+
+/* Empty book list styles */
+.empty-book-list p {
+  text-align: center;
+  color: #999999;
+}

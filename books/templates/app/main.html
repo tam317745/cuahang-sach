@@ -1,0 +1,294 @@
+{% extends "app/home.html" %} 
+{% load static %}
+
+{% block extra_js %}
+<script src="{% static 'cart.js' %}"></script>
+{% endblock %}
+
+{% block main_content %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slides = document.querySelectorAll('.banner-images img');
+    const prevButton = document.querySelector('.banner-images button:first-of-type');
+    const nextButton = document.querySelector('.banner-images button:last-of-type');
+    const dots = document.querySelectorAll('.banner-images .dots div');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            dots[i].classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+                dots[i].classList.add('active');
+            }
+        });
+    }
+
+    prevButton.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    });
+
+    nextButton.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+        });
+    });
+
+    // Tự động chuyển slide (tùy chọn)
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }, 3000); // Chuyển sau 5 giây
+});
+</script>
+ <main>
+  <div class="container">  
+   <!--  menu the loai trai-->
+   <section class="row">
+    <div class="product-categories">
+     <aside>
+      <ul>
+      <li>
+        <img alt="Economics icon" src="{% static "images/kinhte-kinang.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachkinhte"%}">Sách Kinh Tế - Kĩ Năng</a>
+     </li>
+     <li>
+        <img alt="Psychology icon" src="{% static "images/nghethuat-tamli.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachnghethuat"%}">Sách Nghệ Thuật Sống - Tâm Lý</a>
+     </li>
+     <li>
+        <img alt="Vietnamese literature icon" src="{% static "images/vanhoc.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachvanhocvn"%}">Sách Văn Học Việt Nam</a>
+     </li>
+     <li>
+        <img alt="Foreign literature icon" src="{% static "images/vanhocncngoai.jpg" %}"href="{%url "sachthieunhi" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachvanhocncngoai"%}">Sách Văn Học Nước Ngoài</a>
+     </li>
+     <li>
+        <img alt="Children's books icon" src="{% static "images/sachthieunhi.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachthieunhi"%}">Sách Thiếu Nhi</a>
+     </li>
+     <li>
+        <img alt="Education icon" src="{% static "images/giaoduc-giadinh.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachgiaoduc"%}">Sách Giáo Dục - Gia Đình</a>
+     </li>
+     <li>
+        <img alt="History icon" src="{% static "images/lichsu.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachlichsu"%}">Sách Lịch Sử</a>
+     </li>
+     <li>
+        <img alt="Culture icon" src="{% static "images/kinhte-kinang.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachvanhoa"%}">Sách Văn Hóa - Nghệ Thuật</a>
+     </li>
+     <li>
+        <img alt="Spirituality icon" src=" {% static "images/tamlinh-tongiao.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachtamlinh"%}">Sách Tâm Linh - Tôn Giáo</a>
+     </li>  
+     <li>
+        <img alt="Health icon " src="{% static "images/yhoc-thucduong.jpg" %}" width="20" height="20"/>
+        <a class="dropmenu" href="{% url "sachyhoc"%}">Sách Y Học - Thực Dưỡng</a>
+     </li>
+    </ul>
+   </aside>
+  </div>   
+   <!-- Main slider images -->
+    
+    <div class="banner-images">
+    <img src="{% static 'images/banner.jpg' %}" alt="Phù Thủy Tranh Giả Mạo book promotion" class="active">
+    <img src="{% static 'images/banner2.jpg' %}" alt="Slide 2">
+    <img src="{% static 'images/banner3.jpg' %}" alt="Slide 3">
+    <button aria-label="Previous slide">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button aria-label="Next slide">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    <div class="dots">
+        <div class="active"></div>
+        <div></div>
+        <div></div>
+    </div>
+   </div>
+   <!-- Right side vertical ads -->
+    <aside class="right-banner">
+     <div>
+      <img alt="Manifest Toàn Năng book ad" src="{% static "images/banner-right.jpg" %}" width="50" height="50"/>
+     </div>
+     <div>
+      <img alt="The Mindful Body book ad" src="{% static "images/banner-right2.jpg" %}" width="50" height="50"/>
+     </div>
+     <div>
+      <img alt="Cuộc Chiến Kim Loại Hiếm book ad" src="{% static "images/banner-right3.jpg" %}" width="50" height="50"/>
+     </div>   
+     <aside>
+  </section>
+ </div>
+  </main>
+  <!-- Promotion Section 1 -->
+  <section>
+   <div class="product">
+        <span></span>
+        <h3>SÁCH VĂN HỌC VIỆT NAM</h3>
+        <span></span>
+    </div>
+    <div class="book-list">
+        {% for book in books %}
+        {% if book.category.name == 'Sách Văn Học Việt Nam' %}
+        <div class="book-item">
+            <a href="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url|default:'/static/images/default.jpg' }}" alt="{{ book.title }}" class="book-img">
+            </a>
+            <h4>{{ book.author }}</h4>
+            <h3>{{ book.title }}</h3>
+            <div class="price-container">
+                {% if book.discount > 0 %}
+                <p class="price">{{ book.discounted_price|floatformat:"0" }} <span class="currency">₫</span></p>
+                <p class="original-price">{{ book.price|floatformat:"0" }} ₫</p>
+                <span class="discount">-{{ book.discount }}%</span>
+                {% else %}
+                <p class="price">{{ book.price|floatformat:"0" }} <span class="currency">₫</span></p>
+                {% endif %}
+            </div>
+            <form action="{% url 'add_to_cart' book.id %}" method="post" class="add-to-cart-form" data-book-id="{{ book.id }}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="preorder-btn"><i class="fas fa-shopping-cart"></i> Thêm</button>
+            </form>
+        </div>  
+        {% endif %}
+        {% empty %}
+        <div class="empty-book-list">
+            <p>Hiện chưa có sách nào</p>
+        </div>
+        {% endfor %}
+    </div>
+  </section>
+  <section>
+   <div class="product"> 
+    <span></span> 
+    <h3>SÁCH KINH TẾ</h3> 
+    <span></span> 
+    </div> 
+    <div aria-label="Sách Mới" class="book-list" role="list"> 
+    <!-- Book 1 --> 
+    {% for book in books %} 
+      {% if book.category.name == 'Sách Kinh Tế - Kỹ Năng' %}
+        <div class="book-item" role="listitem"> 
+            <a href="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url|default:'/static/images/default.jpg' }}" alt="{{ book.title }}" class="book-img">
+            </a>
+            <h4>{{ book.author }}</h4>
+            <h3>{{ book.title }}</h3>
+            <div class="price-container">
+                {% if book.discount > 0 %}
+                <p class="price">{{ book.discounted_price|floatformat:"0" }} <span class="currency">₫</span></p>
+                <p class="original-price">{{ book.price|floatformat:"0" }} ₫</p>
+                <span class="discount">-{{ book.discount }}%</span>
+                {% else %}
+                <p class="price">{{ book.price|floatformat:"0" }} <span class="currency">₫</span></p>
+                {% endif %}
+            </div>
+            <form action="{% url 'add_to_cart' book.id %}" method="post" class="add-to-cart-form" data-book-id="{{ book.id }}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="preorder-btn"><i class="fas fa-shopping-cart"></i> Thêm</button>
+            </form>
+        </div>  
+        {% endif %}
+        {% empty %}
+        <div class="empty-book-list">
+            <p>Hiện chưa có sách nào</p>
+        </div>
+        {% endfor %}
+    </div>
+  </section>
+  <section>
+   <div class="product"> 
+    <span></span> 
+    <h3>SÁCH THIẾU NHI</h3> 
+    <span></span> 
+    </div> 
+    <div aria-label="Sách Mới" class="book-list" role="list"> 
+    <!-- Book 1 --> 
+    {% for book in books %} 
+      {% if book.category.name == 'Sách Thiếu Nhi' %}
+        <div class="book-item" role="listitem"> 
+            <a href="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url|default:'/static/images/default.jpg' }}" alt="{{ book.title }}" class="book-img">
+            </a>
+            <h4>{{ book.author }}</h4>
+            <h3>{{ book.title }}</h3>
+            <div class="price-container">
+                {% if book.discount > 0 %}
+                <p class="price">{{ book.discounted_price|floatformat:"0" }} <span class="currency">₫</span></p>
+                <p class="original-price">{{ book.price|floatformat:"0" }} ₫</p>
+                <span class="discount">-{{ book.discount }}%</span>
+                {% else %}
+                <p class="price">{{ book.price|floatformat:"0" }} <span class="currency">₫</span></p>
+                {% endif %}
+            </div>
+            <form action="{% url 'add_to_cart' book.id %}" method="post" class="add-to-cart-form" data-book-id="{{ book.id }}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="preorder-btn"><i class="fas fa-shopping-cart"></i> Thêm</button>
+            </form>
+        </div>  
+        {% endif %}
+        {% empty %}
+        <div class="empty-book-list">
+            <p>Hiện chưa có sách nào</p>
+        </div>
+        {% endfor %}
+    </div>
+  </section>
+  <section>
+   <div class="product"> 
+    <span></span> 
+    <h3>SÁCH TÂM LINH - TÔN GIÁO</h3> 
+    <span></span> 
+    </div> 
+    <div aria-label="Sách Mới" class="book-list" role="list"> 
+    <!-- Book 1 --> 
+    {% for book in books %} 
+      {% if book.category.name == 'Sách Tâm Linh Tôn Giáo' %}
+        <div class="book-item" role="listitem"> 
+            <a href="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url|default:'/static/images/default.jpg' }}" alt="{{ book.title }}" class="book-img">
+            </a>
+            <h4>{{ book.author }}</h4>
+            <h3>{{ book.title }}</h3>
+            <div class="price-container">
+                {% if book.discount > 0 %}
+                <p class="price">{{ book.discounted_price|floatformat:"0" }} <span class="currency">₫</span></p>
+                <p class="original-price">{{ book.price|floatformat:"0" }} ₫</p>
+                <span class="discount">-{{ book.discount }}%</span>
+                {% else %}
+                <p class="price">{{ book.price|floatformat:"0" }} <span class="currency">₫</span></p>
+                {% endif %}
+            </div>
+            <form action="{% url 'add_to_cart' book.id %}" method="post" class="add-to-cart-form" data-book-id="{{ book.id }}">
+                {% csrf_token %}
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="preorder-btn"><i class="fas fa-shopping-cart"></i> Thêm</button>
+            </form>
+        </div>  
+        {% endif %}
+        {% empty %}
+        <div class="empty-book-list">
+            <p>Hiện chưa có sách nào</p>
+        </div>
+        {% endfor %}
+    </div>
+  </section>
+    </div>
+  </section>
+  
+{% endblock main_content %}

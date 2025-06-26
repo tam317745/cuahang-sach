@@ -1,0 +1,63 @@
+{% extends "app/home.html" %} 
+{% load static %}
+
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static 'product.css' %}">
+   
+{% endblock extra_css %}
+
+{% block search %}
+    <section class="search-results">
+        <div class="product">
+            <span></span>
+            <h3>Kết quả tìm kiếm cho "{{ query|default:'Tất cả sách' }}"</h3>
+            <span></span>
+        </div>
+        {% if books %}
+            <div class="book-list">
+                {% for book in books %}
+                    <div class="book-item">
+                        <a href="{% url 'product_detail' book.pk %}">
+                            {% if book.image %}
+                                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-img">
+                            {% else %}
+                                <img src="{% static 'images/default_book.jpg' %}" alt="Default Book" class="book-img">
+                            {% endif %}
+                            <h3>{{ book.title }}</h3>
+                            <p>Tác giả: {{ book.author }}</p>
+                        </a>
+                        <div class="price-container">
+                            {% if book.discount > 0 %}
+                                <p class="price">{{ book.discounted_price|floatformat:"0" }} ₫</p>
+                                <p class="original-price">{{ book.price|floatformat:"0" }} ₫</p>
+                                <span class="discount">-{{ book.discount }}%</span>
+                            {% else %}
+                                <p class="price">{{ book.price|floatformat:"0" }} ₫</p>
+                            {% endif %}
+                        </div>
+                        <form action="{% url 'add_to_cart' book.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="1" min="1">
+                            <button type="submit" class="preorder-btn"><i class="fas fa-shopping-cart"></i>Thêm</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if page_obj.has_other_pages %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}&q={{ query|urlencode }}" class="pagination-btn">Trước</a>
+                    {% endif %}
+                    <span class="pagination-btn" style="background-color: #ffffff; color: #ef4444;">Trang {{ page_obj.number }} / {{ paginator.num_pages }}</span>
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}&q={{ query|urlencode }}" class="pagination-btn">Tiếp</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="empty-book-list">
+                <p>Không tìm thấy sách nào phù hợp với từ khóa "{{ query }}".</p>
+            </div>
+        {% endif %}
+    </section>
+{% endblock search %}
