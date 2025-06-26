@@ -11,9 +11,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Q, Sum
+from django.conf import settings
 
-
-
+def test_storage(request):
+    return HttpResponse(settings.DEFAULT_FILE_STORAGE)
 
 def register(request):
     form = CreateUserForm
