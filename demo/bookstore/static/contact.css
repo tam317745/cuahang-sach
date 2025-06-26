@@ -1,0 +1,49 @@
+
+
+.main-container {
+    max-width: 1280px;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.highlight {
+    font-weight: 700;
+}
+
+.intro-text {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.description {
+    margin-bottom: 1rem;
+}
+
+.contact-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+.contact-list li {
+    margin-bottom: 0.5rem;
+}
+
+.contact-label {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.contact-link {
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}

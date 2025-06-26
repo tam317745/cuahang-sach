@@ -1,0 +1,58 @@
+{% extends "app/home.html" %} 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  {% block extra_css %}
+  <link rel="stylesheet" href="{% static 'register.css' %}">
+  {% endblock extra_css %}
+</head>
+<body>
+    {% block register %}
+  <div class="register-form">
+    <h2>Đăng ký tài khoản</h2>
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Địa chỉ Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="first_name">Họ</label>
+        <input type="text" id="first_name" name="first_name">
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Tên</label>
+        <input type="text" id="last_name" name="last_name">
+      </div>
+
+      <div class="form-group">
+        <label for="password1">Mật khẩu</label>
+        <input type="password" id="password1" name="password1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password2">Nhập lại mật khẩu</label>
+        <input type="password" id="password2" name="password2" required>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Đăng ký</button>
+      </div>
+
+       <p class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4">Bạn có muốn đăng nhập?<a href = {% url 'login' %} > Login </a></p>
+    </form>
+  </div>
+  {% endblock register %} 
+</body>
+</html>

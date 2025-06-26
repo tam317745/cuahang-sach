@@ -1,0 +1,163 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'product_detail.css' %}">
+{% endblock %}
+
+{% block product_detail %}
+<div class="product-detail-container">
+    <div class="product-image">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-main-image">
+        {% else %}
+            <img src="{% static 'images/placeholder.jpg' %}" alt="No image" class="product-main-image">
+        {% endif %}
+    </div>
+    <div class="product-info">
+        <h1 class="product-title">{{ product.title }}</h1>
+        <p class="product-author">Tác giả: {{ product.author }}</p>
+        
+        <div class="product-price">
+            {% if product.discount > 0 %}
+                <span class="discounted-price">{{ product.discounted_price|floatformat:"0" }} ₫</span>
+                <span class="original-price">{{ product.price|floatformat:"0" }} ₫</span>
+                <span class="discount">(-{{ product.discount|floatformat:"0" }}%)</span>
+            {% else %}
+                <span class="discounted-price">{{ product.price|floatformat:"0" }} ₫</span>
+            {% endif %}
+        </div>
+
+        <p>{{ product.description|default:"Chưa có mô tả" }}</p>
+        <p>Danh mục: {{ product.category.name|default:"Chưa có danh mục" }}</p>
+
+        <ul class="promotion-list">
+            <li>MIỄN PHÍ GIAO HÀNG trên đơn hàng từ 150.000đ & TPHCM, 300.000đ & Tỉnh/Thành khác</li>
+            <li>Mã DAP10K - GIẢM 10k CHO ĐH từ 29k</li>
+            <li>Mã DAP5% - GIẢM THẲNG 5% CHO ĐH từ 49k</li>
+            <li>Mã DAP100K - GIẢM 100k CHO ĐH từ 1.49M</li>
+        </ul>
+
+        <form method="post" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="buy-now-btn">MUA</button>
+        </form>
+    </div>
+</div>
+
+<div class="review-section">
+    <h2>ĐÁNH GIÁ SẢN PHẨM</h2>
+    <p>Hãy đánh giá {{ product.title }} để giúp người dùng khác đưa ra lựa chọn phù hợp</p>
+    
+    <div class="rating-summary">
+        <span class="rating-score">{{ product.average_rating|floatformat:1 }}/5</span>
+        <span class="rating-stars">★</span>
+        <span class="rating-count">({{ product.review_count }} đánh giá)</span>
+    </div>
+
+    <div class="rating-breakdown">
+        <div class="rating-bar">
+            <span>5 ★</span>
+            <div class="bar"><div style="width: {{ product.rating_5 }}%;"></div></div>
+            <span>{{ product.rating_5|floatformat:1 }}%</span>
+        </div>
+        <div class="rating-bar">
+            <span>4 ★</span>
+            <div class="bar"><div style="width: {{ product.rating_4 }}%;"></div></div>
+            <span>{{ product.rating_4|floatformat:1 }}%</span>
+        </div>
+        <div class="rating-bar">
+            <span>3 ★</span>
+            <div class="bar"><div style="width: {{ product.rating_3 }}%;"></div></div>
+            <span>{{ product.rating_3|floatformat:1 }}%</span>
+        </div>
+        <div class="rating-bar">
+            <span>2 ★</span>
+            <div class="bar"><div style="width: {{ product.rating_2 }}%;"></div></div>
+            <span>{{ product.rating_2|floatformat:1 }}%</span>
+        </div>
+        <div class="rating-bar">
+            <span>1 ★</span>
+            <div class="bar"><div style="width: {{ product.rating_1 }}%;"></div></div>
+            <span>{{ product.rating_1|floatformat:1 }}%</span>
+        </div>
+    </div>
+
+    <div class="review-list">
+        {% for review in product.reviews.all %}
+            <div class="review">
+                <p><strong>{{ review.name }}</strong> - {{ review.rating }} ★: {{ review.content }}</p>
+                <p>{{ review.created_at|date:"F d, Y" }}</p>
+            </div>
+        {% empty %}
+            <p>Chưa có đánh giá nào.</p>
+        {% endfor %}
+    </div>
+
+    <h2>GỬI ĐÁNH GIÁ CỦA BẠN</h2>
+    <form action="{% url 'product_detail' product.id %}" method="POST" class="review-form">
+        {% csrf_token %}
+        <div class="review-input">
+            <label>Đánh giá của bạn về sản phẩm này</label>
+            <textarea name="review_content" required></textarea>
+        </div>
+        <div class="review-input">
+            <label>Đánh giá</label>
+            <div class="star-rating" data-rating="0">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <input type="hidden" name="rating" id="rating" value="0" required>
+        </div>
+        <div class="review-input">
+            <label>Tên</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="review-input">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+        <button type="submit" class="buy-now-btn">GỬI</button>
+    </form>
+</div>
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stars = document.querySelectorAll('.star-rating .star');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-value');
+                ratingInput.value = rating;
+
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < rating; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+
+            star.addEventListener('mouseover', function() {
+                const rating = this.getAttribute('data-value');
+                for (let i = 0; i < rating; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+
+            star.addEventListener('mouseout', function() {
+                const currentRating = ratingInput.value;
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < currentRating; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+{% endblock product_detail %}
