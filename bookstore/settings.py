@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'books',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +130,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # thêm dòng này
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'duofgmrd7',
+    'API_KEY': '871535583486642',
+    'API_SECRET': 'bbbkbirCkDPaRWNbpXodpZ3UrSA'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
