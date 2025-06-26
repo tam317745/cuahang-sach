@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>DAPSTORE</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  {% block extra_css %}{% endblock %}
+  {% block extra_js %}
+  <script src="{% static 'cart.js' %}"></script>
+  {% endblock %}
+ </head>  
+ <body>
+  <!-- Top header with logo, search, contact, login, cart -->
+  <header>
+   <a href="{% url 'home'%}">
+    <img alt="DAPSTORE logo" src="{% static "images/logo.jpg" %}" width="400" height="200"  />
+    <span>
+     DAPSTORE
+    </span>
+   </a>
+   <form action="{% url 'search' %}" method="GET">
+    <input type="text" name="q" placeholder="Bạn muốn tìm sách gì ?" value="{{ query|default:'' }}">
+    <button aria-label="Search" type="submit">
+     <i class="fas fa-search"></i>
+    </button>
+   </form>
+   <img alt="DAPSTORE logo" src="{% static "images/logo.jpg" %}" width="40" height="40"  />
+   <span> 
+     <h3>DAPSTORE XIN CHÀO </h3>
+    </span>
+   <div>  
+ {% if request.user.is_authenticated %}
+  <div class="user-display">
+    <span class="username">{{ request.user.username }}</span>
+    <a href="{% url 'logout' %}" class="logout-link">Đăng xuất</a>
+  </div>
+{% else %}
+  <button onclick="window.location.href='{% url 'login' %}'" aria-label="Đăng nhập">
+    <i class="far fa-user-circle"></i>
+    <span style="font-size: 12px;">ĐĂNG NHẬP</span>
+  </button>
+{% endif %}
+
+
+
+
+    <div class=''> </div>
+    <button aria-label="Giỏ hàng" class="nav-button" onclick="window.location.href='{% url 'cart' %}'">
+     <i class="fas fa-shopping-cart"></i>
+     <span>GIỎ HÀNG</span>
+     <span class="cart-count">{{ cart_item_count|default:0 }}</span>
+    </button>
+   </div>
+   
+  </header>
+  
+  <!-- Navigation bar -->
+  <nav>
+   <div>
+    <button aria-expanded="false" aria-haspopup="true">
+     <i class="fas fa-bars"></i>
+     <span>TẤT CẢ DANH MỤC</span>
+    </button>
+    <!-- menu thể loai thả xuống  -->
+    <div>
+     <ul>
+      <li>
+       <img alt="Economics icon" src="{% static "images/kinhte-kinang.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachkinhte"%}" class="category-link">Sách Kinh Tế - Kĩ Năng</a>
+      </li>
+      <li>
+       <img alt="Psychology icon" src="{% static "images/nghethuat-tamli.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachnghethuat"%}" class="category-link">Sách Nghệ Thuật Sống-Tâm Lý</a>
+        </li>
+      </li>
+      <li>
+       <img alt="Vietnamese literature icon" src="{% static "images/vanhoc.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachvanhocvn"%}" class="category-link">Sách Văn Học Việt Nam</a>
+      </li>
+      <li>
+       <img alt="Foreign literature icon" src="{% static "images/vanhocncngoai.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachvanhocncngoai"%}" class="category-link">Sách Văn Học Nước Ngoài</a>
+      </li>
+      <li>
+       <img alt="Children's books icon" src="{% static "images/sachthieunhi.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachthieunhi"%}" class="category-link">Sách Thiếu Nhi</a>
+      </li>
+      <li>
+       <img alt="Education icon" src="{% static "images/giaoduc-giadinh.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachgiaoduc"%}" class="category-link">Sách Giáo Dục - Gia Đình</a>
+      </li>
+      <li>
+       <img alt="History icon" src="{% static "images/lichsu.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachlichsu"%}" class="category-link">Sách Lịch Sử</a>
+      </li>
+      <li>
+       <img alt="Culture icon" src="{% static "images/kinhte-kinang.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachvanhoa"%}" class="category-link">Sách Văn Hóa - Nghệ Thuật</a>
+      </li>
+      <li>
+       <img alt="Spirituality icon" src="{% static "images/tamlinh-tongiao.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachtamlinh"%}" class="category-link">Sách Tâm Linh - Tôn Giáo</a>
+      </li>
+      <li>
+       <img alt="Health icon" src="{% static "images/yhoc-thucduong.jpg" %}" width="20" height="20"/>
+       <a href="{% url "sachyhoc"%}" class="category-link">Sách Y học - Thực Dưỡng</a>
+      </li>
+     </ul>
+    </div>  
+
+   </div>
+   <a href="{%url "support"%}">HỖ TRỢ KHÁCH HÀNG</a>
+   <a href="{%url "contact"%}">LIÊN HỆ</a>
+   <a href="{% url "about" %}">VỀ DAPSTORE</a>
+   <a href="{%url "sachtonghop"%}">
+    SÁCH MỚI TUYỂN CHỌN
+   </a>
+    <div>
+     <i class="fas fa-phone-alt"></i>
+    </div>
+    <div>
+      GỌI ĐẶT HÀNG 
+    </div>  
+    <div>
+      0231231314
+    </div>
+  
+  </nav>
+  <!-- Main content -->
+    {% block main_content%} {% endblock main_content%}
+  <!-- giỏ hàng-->
+    {% block cart_content %} {% endblock cart_content %}
+   <!-- giới thiệu về DAP-->
+    {% block about_dap %} {% endblock about_dap %}
+    <!-- liên hệ-->
+    {% block contact %} {% endblock contact %}
+    <!-- trang dang ki-->
+    {% block register %} {% endblock register %}
+    <!--trang dang nhap-->
+    {% block login %} {% endblock%}
+    <!--trang sach-->
+    {% block sachthieunhi%} {% endblock sachthieunhi%}
+    <!--sach van hoc-->
+    {% block sachvanhocvn%} {% endblock sachvanhocvn%}
+    <!--sach kinh te-->
+    {% block sachkinhte%} {% endblock sachkinhte%}
+    <!--sach nghe thuat-->
+    {% block sachnghethuat%} {% endblock sachnghethuat%}
+    <!--sach tamlinh-->
+    {% block sachtamlinh%} {% endblock sachtamlinh%}
+    <!--sach van hoc nuoc ngoai-->
+    {% block sachvanhocncngoai%} {% endblock sachvanhocncngoai%}
+    <!--sach giao duc-->
+    {% block sachgiaoduc%} {% endblock sachgiaoduc%}
+    <!--sach van hoa-->
+    {% block sachvanhoa%} {% endblock sachvanhoa%}
+    <!--sach lich su-->
+    {%block sachlichsu%} {% endblock sachlichsu%}
+    <!--sach y hoc-->
+    {% block sachyhoc%} {% endblock sachyhoc%}
+    <!--chi tiết sản phẩm-->
+    {% block product_detail%} {% endblock product_detail%}
+    <!-- tong hop sach-->
+    {% block sachtonghop%} {% endblock sachtonghop%}
+    <!--hỗ trợ khách hàng-->
+    {%block support%} {% endblock support%}
+    <!--tìm kiếm-->
+    {%block search%} {% endblock search%}
+    <!-- tủ sách-->
+     {%block tusach%} {% endblock tusach%}
+  <!-- Footer -->
+  <footer>
+   <div>
+    <div>
+     <h3>Nhà sách DAPSTORE Online</h3>
+     <p>(Hoạt động từ 8h - 17h, thứ 2 - thứ 7)</p>
+     <div>
+      <div><i class="fas fa-phone-alt"></i></div>
+      <span>Gọi đặt hàng: <strong>028 7300 7684</strong></span>
+     </div>
+     <div>
+      <div><i class="far fa-envelope"></i></div>
+      <span>Email: <strong>hotro@dapstore.vn</strong></span>
+     </div>
+    </div>
+    <div>
+     <h3>Hỗ trợ khách hàng</h3>
+     <ul>
+      <li>Hướng dẫn đặt hàng</li>
+    </div>
+    <div>
+     <h3>Về DAPSTORE</h3>
+     <ul>
+      <li>Giới thiệu DAPSTORE</li>
+     </ul>
+    </div>
+    <div>
+     <h3>Kết nối với DAPSTORE</h3>
+     <div>
+      <img alt="Facebook icon" src="{% static "images/fb.jpg" %}" width="16" height="16"/>
+      <span>6.072 theo dõi trang</span>
+     </div>
+     <div>
+      <img alt="Instagram icon" src="{% static "images/insta.jpg" %}" width="16" height="16"/>
+      <span>355 theo dõi trang</span>
+     </div>
+     <h3>Gian hàng của DAPSTORE</h3>
+     <ul>
+      <li>
+       <img alt="Lazada icon" src="{% static "images/lazada.jpg" %}" width="16" height="16"/>
+       <span>Trên Lazada</span>
+      </li>
+      <li>
+       <img alt="Shopee icon" src="{% static "images/shoppe.jpg" %}" width="16" height="16"/>
+       <span>Trên Shopee</span>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div>
+    <p>© 2025 - Bản quyền của DAPSTORE – www.DAPSTORE.vn</p>
+    <p> Thuộc kkkk
+   </div>
+  </footer>
+ </body>
+</html>

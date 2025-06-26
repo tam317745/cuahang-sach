@@ -1,0 +1,89 @@
+{% extends "app/home.html" %} 
+{% load static %}
+
+{% block extra_css %}
+   <link rel="stylesheet" href="{% static 'support.css' %}">
+{%endblock extra_css%}
+
+
+{% block support%}
+<div class="main-container">
+    <h1 class="intro-text">Hướng Dẫn Đặt Hàng tại DAPSTORE.vn</h1>
+    <p class="date">25/01/2019</p>
+    <p class="description">
+        Quý khách có thể đặt hàng trực tuyến ở website www.dapstore.com.vn.vn thông qua một số bước đặt hàng đơn giản.
+    </p>
+    <div class="section">
+        <p class="highlight">1. Tìm kiếm sản phẩm:</p>
+        <p class="description">Quý khách có thể tìm sản phẩm theo 3 cách:</p>
+        <ul class="item-list">
+            <li class="item">a. Gõ tên sản phẩm vào thanh tìm kiếm</li>
+            <li class="item">b. Tìm theo danh mục</li>
+        </ul>
+    </div>
+    <div class="section">
+        <p class="highlight">2. Thêm sản phẩm vào giỏ hàng:</p>
+        <p class="description">
+            Khi đã tìm được sản phẩm mong muốn, quý khách vui lòng bấm vào hình hoặc tên sản phẩm để vào được trang thông tin chi tiết của sản phẩm, sau đó:
+        </p>
+        <ul class="item-list">
+            <li class="item">a. Kiểm tra thông tin sản phẩm: giá, thông tin khuyến mãi.</li>
+            <li class="item">b. Chọn số lượng mong muốn.</li>
+            <li class="item">c. Thêm sản phẩm vào giỏ hàng.</li>
+        </ul>
+    </div>
+    <div class="section">
+        <p class="highlight">3. Kiểm tra giỏ hàng và đặt hàng:</p>
+        <p class="item-list">
+            Để đặt nhiều sản phẩm khác nhau vào cùng 1 đơn hàng, vui lòng thực hiện theo các bước sau:
+        </p>
+        <ul class="item-list">
+            <li class="item">a. Chọn "Tiếp tục mua sắm" hoặc click vào logo DAPSTORE để trở về trang chủ</li>
+            <li class="item">b. Thêm sản phẩm vào giỏ hàng như ở Bước 2.</li>
+        </ul>
+        <p class="note">
+            *Quá trình này có thể lặp lại cho đến khi quý khách hoàn tất việc bỏ tất cả các sản phẩm cần đặt mua vào giỏ hàng.
+        </p>
+        <p class="description">
+            Sau khi quý khách đã có đủ sản phẩm cần đặt trong giỏ hàng, vui lòng sử dụng mã giảm giá (nếu có) và tiếp tục các bước sau để đặt hàng:
+        </p>
+    </div>
+    <div class="section">
+        <p class="highlight">4. Đăng nhập hoặc đăng ký tài khoản:</p>
+        <p class="description">
+            Quý khách vui lòng đăng nhập bằng tài khoản đã có ở DAPSTORE . Trong trường hợp chưa đăng ký tài khoản, quý khách có thể chọn dòng "Tạo tài khoản" để đăng ký tài khoản tại Netabooks.vn.
+        </p>
+        <p class="description">
+            Sau khi đã hoàn tất, quý khách có thể bấm vào chữ "T tạo tài khoản" để hoàn tất quá trình đăng ký.
+        </p>
+    </div>
+    <div class="section">
+        <p class="highlight">5. Điền địa chỉ giao hàng</p>
+    </div>
+    <div class="section">
+        <p class="highlight">6. Chọn phương thức thanh toán và "Đặt Mua"</p>
+        <p class="description">
+            DAPSTORE hỗ trợ giao hàng và thanh toán tận nơi cho tất cả các đơn hàng trên toàn quốc. Quý khách vui lòng tham khảo thêm tại: <span class="highlight">Các Phương Thức Thanh Toán</span>
+        </p>
+        <p class="note">
+            Xuất hóa đơn VAT (nếu có), địa chỉ nhận hàng, giá khuyến mãi, tổng tiền.
+        </p>
+        <p class="description">
+            Nếu các thông tin trên đã chính xác, quý khách vui lòng bấm "Đặt Mua", hệ thống sẽ bắt đầu tiến hành tạo đơn hàng dựa trên các thông tin quý khách đã đăng ký.
+        </p>
+    </div>
+    <div class="section">
+        <p class="highlight">7. Kiểm tra và xác nhận đơn hàng</p>
+        <p class="description">
+            Sau khi hoàn tất các bước đặt mua, hệ thống sẽ gửi đến quý khách một mã số đơn hàng và thông báo thời gian giao hàng dự kiến, quý khách có thể kiểm tra lại đơn hàng bằng cách bấm vào dòng "Đơn hàng của tôi".
+        </p>
+    </div>
+    <div class="section">
+        <p class="highlight">8. Theo dõi tình trạng đơn hàng</p>
+        <p class="description">
+            Khi đặt hàng thành công, quý khách có thể theo dõi tiến trình xử lý và vận chuyển của đơn hàng bằng cách xem lịch sử đơn hàng đã mua.
+        </p>
+    </div>
+</div>
+
+{%endblock support%}

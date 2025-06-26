@@ -1,0 +1,44 @@
+{% extends "app/home.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock extra_css %}
+
+{% block login %}
+<section class="login-section">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-row">
+        <!-- Form -->
+        <div class="login-form">
+          <div class="form-inner">
+            <h3 class="form-title">Đăng nhập</h3>
+            <form method="POST" action="{% url 'login' %}">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" name="username" id="username" required />
+              </div>
+              <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" name="password" id="password" required />
+              </div>
+              <div class="form-group">
+                <button type="submit">Đăng nhập</button>
+              </div>
+              <p class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4">Bạn có muốn đăng kí?<a href = {% url 'register' %} > Đăng kí </a></p>
+            </form>
+          </div>
+        </div>
+
+        <!-- Ảnh -->
+        <div class="login-image">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+               alt="Login Image" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock login %}
